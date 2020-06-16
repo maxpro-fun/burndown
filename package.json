@@ -12,7 +12,8 @@
   },
   "homepage": "https://github.com/maxpro-fun/burndown#readme",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc --watch",
+    "start:pack": "node ./dist/lib/propack/propack"
   },
   "dependencies": {},
   "devDependencies": {
