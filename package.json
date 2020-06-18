@@ -13,10 +13,11 @@
   "homepage": "https://github.com/maxpro-fun/burndown#readme",
   "scripts": {
     "start": "tsc --watch",
-    "start:pack": "node ./dist/lib/propack/propack"
+    "start:pack": "node --trace-warnings ./dist/lib/propack/propack"
   },
   "dependencies": {},
   "devDependencies": {
+    "@types/node": "^14.0.13",
     "typescript": "^3.9.5"
   }
 }
