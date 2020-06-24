@@ -40,14 +40,14 @@ export interface IWatchItem {
   isDirectory: boolean;
 }
 
-const watcher = state(async () => {
+const watcher = state(async (hole) => {
   console.log("watcher");
   const files = await readFSStructure(["./src"]);
 
   files.forEach((file) => {
     fs.watch(file.path, undefined, (event: string, fileName: string) => {
-      // console.log(event, fileName, file.path);
-      // hole.update(files);
+      console.log(event, fileName, file.path);
+      hole.update(files);
     });
   });
 

@@ -38,7 +38,14 @@ namespace StateHole {
 
     states.set(key, currentState);
 
-    function update<T>(newState: T) {}
+    function update(newState: T) {
+      currentState.value = newState;
+
+      const { subscribers } = currentState;
+      currentState.subscribers = [];
+
+      subscribers.forEach((subscriber) => states.get(subscriber)!.evaluate());
+    }
 
     function useStateHole<AnyT>(stateKey: TState<AnyT>): AnyT | undefined {
       subscribeTo(stateKey);
@@ -62,9 +69,7 @@ namespace StateHole {
       const value = await Promise.resolve(stateFn({ update, useStateHole }));
       currentState.value = value;
 
-      currentState.subscribers.forEach((subscriber) =>
-        states.get(subscriber)!.evaluate()
-      );
+      update(value);
     }
 
     function key() {
