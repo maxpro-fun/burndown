@@ -10,7 +10,7 @@ type TStateFunction<T> = TStatePromiseFunction<T> | TStateNonPromiseFunction<T>;
 type TStatePromiseFunction<T> = (hole: IStateActions<T>) => Promise<T>;
 type TStateNonPromiseFunction<T> = (hole: IStateActions<T>) => T;
 
-interface IStateActions<T> {
+export interface IStateActions<T> {
   update: (newState: T) => void;
   useStateHole<AnyT>(state: TState<AnyT>): AnyT | undefined;
 }
@@ -37,6 +37,8 @@ namespace StateHole {
     };
 
     states.set(key, currentState);
+
+    return key;
 
     function update(newState: T) {
       currentState.value = newState;
@@ -77,7 +79,5 @@ namespace StateHole {
 
       return key;
     }
-
-    return key;
   }
 }
